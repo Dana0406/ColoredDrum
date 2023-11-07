@@ -33,4 +33,5 @@ View(context,attrs){
             canvas.drawArc(centerX - radius, centerY - radius, centerX + radius, centerY + radius, i * angle, angle, true, paint)
         }
     }
+
 }
