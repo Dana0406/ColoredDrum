@@ -49,13 +49,28 @@
         android:id="@+id/startButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/colored_drum"
         android:onClick="onClickStart"
+        android:text="Start"
+        app:layout_constraintBottom_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/resetButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/colored_drum"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:layout_marginTop="8dp"
         tools:ignore="MissingConstraints,OnClick" />
+
+    <Button
+        android:id="@+id/resetButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reset"
+        android:onClick="onClickReset"
+        app:layout_constraintStart_toEndOf="@+id/startButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/colored_drum"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"/>
 
 
 
