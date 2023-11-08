@@ -85,7 +85,7 @@
         android:id="@+id/sizeSeekBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:progress="100"
+        android:progress="50"
         android:max="100"
         android:theme="@style/SeekBarColor"
         app:layout_constraintBottom_toTopOf="@+id/colored_drum"

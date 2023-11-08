@@ -39,8 +39,8 @@ View(context,attrs){
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
 
-        val newRadius = Math.min(w, h) / 2f
-        radius = newRadius
+        val newRadius = Math.min(w, h) / 2.7
+        radius = newRadius.toFloat()
         invalidate()
     }
 

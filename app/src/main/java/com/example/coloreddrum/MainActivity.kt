@@ -155,7 +155,7 @@ class MainActivity : AppCompatActivity() {
         val screenWidth = displayMetrics.widthPixels
 
         val minRadius = screenWidth / 4
-        val maxRadius = screenWidth / 2
+        val maxRadius = screenWidth / 2.7
 
         val newRadius = minRadius + (maxRadius - minRadius) * progress / sizeSeekBar.max
 
