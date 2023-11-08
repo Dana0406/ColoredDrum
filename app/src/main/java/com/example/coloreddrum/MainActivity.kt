@@ -27,12 +27,12 @@ class MainActivity : AppCompatActivity() {
     val factor = 25.7143F
 
     private val colors = arrayListOf<String>(
-        "Голубой",
-        "Синий",
-        "Фиолетовый",
-        "Красный",
-        "Оранжевый",
         "Желтый",
+        "Оранжевый",
+        "Красный",
+        "Фиолетовый",
+        "Синий",
+        "Голубой",
         "Зеленый"
     )
 
@@ -53,10 +53,8 @@ class MainActivity : AppCompatActivity() {
         oldDegree = degree % 360
         degree = (random.nextInt(3600) + 720).toFloat()
 
-        val direction = -1
-
         var rotate = RotateAnimation(
-            oldDegree, oldDegree + direction * degree, RotateAnimation.RELATIVE_TO_SELF, 0.5F,
+            oldDegree, degree, RotateAnimation.RELATIVE_TO_SELF, 0.5F,
             RotateAnimation.RELATIVE_TO_SELF, 0.5F
         )
 
@@ -71,7 +69,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onAnimationEnd(animation: Animation?) {
                 var textResult = getResult(degree % 360)
-                textInput.text = textResult
+                textInput.text = textResult +" " + degree + " " + oldDegree
                 handleResult(textResult)
             }
 
@@ -89,24 +87,28 @@ class MainActivity : AppCompatActivity() {
         var factor_x = 1
         var factor_y = 3
 
-        for (i in 0..15) {
+        var temp = 0
+
+        while(temp < 7){
             if (degree >= (factor * factor_x) && degree < (factor * factor_y)) {
-                text = colors[i]
+                text = colors[temp]
             }
             factor_x += 2
             factor_y += 2
+            temp++
         }
 
-        if (degree >= (factor * 15) && degree < 360 || degree >= 0 && degree < (factor * 1)) {
+
+        if (degree >= (factor * 13) && degree < 360 || degree >= 0 && degree < (factor * 1)) {
             text = colors[colors.size - 1]
         }
-
 
         return text
     }
 
     fun onClickReset(view: View) {
-
+        image.visibility = View.GONE
+        customText.visibility = View.GONE
     }
 
     private fun handleResult(result: String) {
