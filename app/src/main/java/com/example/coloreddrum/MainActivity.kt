@@ -1,6 +1,7 @@
 package com.example.coloreddrum
 
 import android.annotation.SuppressLint
+import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -9,6 +10,7 @@ import android.view.animation.DecelerateInterpolator
 import android.view.animation.RotateAnimation
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.SeekBar
 import android.widget.TextView
 import com.squareup.picasso.Picasso
 import java.util.*
@@ -17,9 +19,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var buttonStart: Button
     private lateinit var buttonReset: Button
     private lateinit var coloredDrum: ColoredDrumView
-    private lateinit var textInput: TextView
     private lateinit var customText: CustomTextView
     private lateinit var image: ImageView
+    private lateinit var sizeSeekBar: SeekBar
 
     val random = Random()
     var oldDegree = 0F
@@ -44,9 +46,25 @@ class MainActivity : AppCompatActivity() {
         buttonStart = findViewById(R.id.startButton)
         buttonReset = findViewById(R.id.resetButton)
         coloredDrum = findViewById(R.id.colored_drum)
-        textInput = findViewById(R.id.textView)
         customText = findViewById(R.id.customText)
         image = findViewById(R.id.image)
+        sizeSeekBar = findViewById(R.id.sizeSeekBar)
+
+        sizeSeekBar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(p0: SeekBar?, progress: Int, p2: Boolean) {
+                val newRadius = calculateNewRadius(progress)
+                coloredDrum.setRadius(newRadius)
+            }
+
+            override fun onStartTrackingTouch(p0: SeekBar?) {
+
+            }
+
+            override fun onStopTrackingTouch(p0: SeekBar?) {
+
+            }
+
+        })
     }
 
     fun onClickStart(view: View) {
@@ -58,19 +76,17 @@ class MainActivity : AppCompatActivity() {
             RotateAnimation.RELATIVE_TO_SELF, 0.5F
         )
 
-        rotate.duration = 3600
+        rotate.duration = (random.nextInt(4000) + 2000).toLong()
         rotate.fillAfter = true
         rotate.interpolator = DecelerateInterpolator()
 
         rotate.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationRepeat(animation: Animation?) {
-                textInput.text = ""
+
             }
 
             override fun onAnimationEnd(animation: Animation?) {
-                var textResult = getResult(degree % 360)
-                textInput.text = textResult +" " + degree + " " + oldDegree
-                handleResult(textResult)
+                handleResult(getResult(degree % 360))
             }
 
             override fun onAnimationStart(animation: Animation?) {
@@ -133,4 +149,17 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
+    private fun calculateNewRadius(progress: Int): Float {
+        val displayMetrics = Resources.getSystem().displayMetrics
+        val screenWidth = displayMetrics.widthPixels
+
+        val minRadius = screenWidth / 4
+        val maxRadius = screenWidth / 2
+
+        val newRadius = minRadius + (maxRadius - minRadius) * progress / sizeSeekBar.max
+
+        return newRadius.toFloat()
+    }
+
 }

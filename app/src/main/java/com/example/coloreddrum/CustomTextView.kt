@@ -13,7 +13,7 @@ class CustomTextView(context: Context, attrs: AttributeSet) : View(context, attr
 
     init {
         textPaint.color = Color.BLACK
-        textPaint.textSize = 30f
+        textPaint.textSize = 36f
         textPaint.textAlign = Paint.Align.CENTER
     }
 
@@ -22,8 +22,17 @@ class CustomTextView(context: Context, attrs: AttributeSet) : View(context, attr
         canvas.drawText(displayText, width / 2f, height / 2f, textPaint)
     }
 
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
+
+        textPaint.textSize = width / 10f
+        invalidate()
+    }
+
     fun setText(text: String) {
         displayText = text
         invalidate()
     }
+
+
 }

@@ -9,7 +9,10 @@ import android.view.View
 
 class ColoredDrumView(context: Context, attrs:  AttributeSet) :
 View(context,attrs){
+
     private val paint = Paint()
+    private var radius = 0F
+
     private val rainbowColors = intArrayOf(
         Color.parseColor("#ff0000"), Color.parseColor("#ffA500"),
         Color.parseColor("#ffff00"), Color.parseColor("#008000"),
@@ -24,7 +27,6 @@ View(context,attrs){
 
         val centerX = width / 2
         val centerY = height / 2
-        val radius = Math.min(centerX, centerY).toFloat()
 
         val angle = 360f / rainbowColors.size
 
@@ -34,4 +36,16 @@ View(context,attrs){
         }
     }
 
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
+
+        val newRadius = Math.min(w, h) / 2f
+        radius = newRadius
+        invalidate()
+    }
+
+    fun setRadius(newRadius: Float) {
+        radius = newRadius
+        invalidate()
+    }
 }
