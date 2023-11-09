@@ -1,0 +1,30 @@
+R_DEF: Internal format may change without notice
+local
+color black
+color purple_200
+color purple_500
+color purple_700
+color teal_200
+color teal_700
+color white
+drawable baseline_arrow_right_24
+drawable baseline_arrow_right_48
+drawable ic_launcher_background
+drawable ic_launcher_foreground
+id colored_drum
+id customText
+id drumGuidline
+id image
+id position
+id resetButton
+id sizeSeekBar
+id startButton
+layout activity_main
+mipmap ic_launcher
+mipmap ic_launcher_round
+mipmap img_1
+string app_name
+style SeekBarColor
+style Theme.ColoredDrum
+xml backup_rules
+xml data_extraction_rules
