@@ -1,4 +1,4 @@
-package com.example.coloreddrum
+package com.example.coloreddrum.customViews
 
 import android.content.Context
 import android.graphics.Canvas

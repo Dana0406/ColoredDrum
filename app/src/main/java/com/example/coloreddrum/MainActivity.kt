@@ -11,7 +11,8 @@ import android.view.animation.RotateAnimation
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.SeekBar
-import android.widget.TextView
+import com.example.coloreddrum.customViews.ColoredDrumView
+import com.example.coloreddrum.customViews.CustomTextView
 import com.squareup.picasso.Picasso
 import java.util.*
 
@@ -23,10 +24,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var image: ImageView
     private lateinit var sizeSeekBar: SeekBar
 
-    val random = Random()
-    var oldDegree = 0F
-    var degree = 0F
-    val factor = 25.7143F
+    private var oldDegree = 0F
+    private var degree = 0F
+
+    private val random = Random()
+    private val factor = 25.7143F
 
     private val colors = arrayListOf<String>(
         "Желтый",
@@ -114,7 +116,6 @@ class MainActivity : AppCompatActivity() {
             temp++
         }
 
-
         if (degree >= (factor * 13) && degree < 360 || degree >= 0 && degree < (factor * 1)) {
             text = colors[colors.size - 1]
         }
@@ -147,15 +148,15 @@ class MainActivity : AppCompatActivity() {
                 customText.visibility = View.GONE
             }
         }
-
     }
 
     private fun calculateNewRadius(progress: Int): Float {
         val displayMetrics = Resources.getSystem().displayMetrics
         val screenWidth = displayMetrics.widthPixels
+        val screenHeight = displayMetrics.heightPixels
 
-        val minRadius = screenWidth / 4
-        val maxRadius = screenWidth / 2.7
+        val minRadius = Math.min(screenWidth, screenHeight) / 4
+        val maxRadius = Math.min(screenWidth, screenHeight) / 2.7
 
         val newRadius = minRadius + (maxRadius - minRadius) * progress / sizeSeekBar.max
 
